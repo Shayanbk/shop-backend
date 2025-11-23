@@ -28,6 +28,18 @@ const UserSchema = mongoose.Schema({
       message: `password are not the same`,
     },
   },
+  role:{
+    type: String,
+    default: 'user',
+    enum: ["user", "seller", "storekeeper", "admin"]
+  },
+  active : {
+    type: Boolean, 
+    default:true,
+    select : false
+  }
+},{
+  versionKey: false
 });
 UserSchema.pre('save', async function () {
   if (!this.isModified('password')) return;
